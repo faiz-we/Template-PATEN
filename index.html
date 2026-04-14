@@ -1,425 +1,634 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PATEN — PT PALYJA Tirta Edukasi Indonesia</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --blue-deep: #03174a;
-      --blue-dark: #0a2d6e;
-      --blue-mid: #1a5fbd;
-      --blue-light: #3a8fe8;
-      --blue-pale: #e6f1fb;
-      --aqua: #38c6d9;
-      --aqua-pale: #e0f7fa;
-      --cream: #f4f8ff;
-      --text: #0d1f3c;
-      --text-muted: #4a6080;
-      --border: rgba(26,95,189,0.12);
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --navy:#0B1F3A;
+      --navy-mid:#14335A;
+      --blue:#1557B0;
+      --blue-light:#2D7DD2;
+      --sky:#5BA4CF;
+      --aqua:#00B4D8;
+      --aqua-light:#90E0EF;
+      --cream:#F7F9FC;
+      --white:#FFFFFF;
+      --gray:#E8EDF3;
+      --text:#0B1F3A;
+      --text-mid:#3B4F66;
+      --text-muted:#6B7E96;
+      --border:rgba(21,87,176,0.10);
+      --gold:#C9A84C;
     }
-
-    body { background: var(--cream); font-family: 'DM Sans', sans-serif; color: var(--text); overflow-x: hidden; }
-
-    /* ── RIPPLE ── */
-    .ripple { position: absolute; border-radius: 50%; border: 1px solid rgba(56,198,217,0.15); animation: rippleGrow 8s ease-in-out infinite; }
-    .ripple-1 { width: 400px; height: 400px; bottom: -150px; right: 80px; animation-delay: 0s; }
-    .ripple-2 { width: 650px; height: 650px; bottom: -300px; right: -50px; animation-delay: 1.5s; }
-    .ripple-3 { width: 900px; height: 900px; bottom: -450px; right: -200px; animation-delay: 3s; }
-    .ripple-4 { width: 200px; height: 200px; top: 80px; left: -60px; animation-delay: 2s; border-color: rgba(58,143,232,0.12); }
-    .ripple-5 { width: 380px; height: 380px; top: -80px; left: -160px; animation-delay: 4s; border-color: rgba(58,143,232,0.08); }
-    @keyframes rippleGrow { 0%,100%{transform:scale(1);opacity:.6;} 50%{transform:scale(1.04);opacity:1;} }
-
-    /* ── WAVE ── */
-    .wave-container { position: absolute; bottom: 0; left: 0; right: 0; height: 120px; overflow: hidden; }
-    .wave-svg { position: absolute; bottom: 0; width: 200%; height: 100%; animation: waveSlide 10s linear infinite; }
-    .wave-svg-2 { animation: waveSlide 14s linear infinite reverse; opacity: .4; }
-    @keyframes waveSlide { from{transform:translateX(0);} to{transform:translateX(-50%);} }
-
-    /* ── PARTICLES ── */
-    .particles { position: absolute; inset: 0; pointer-events: none; }
-    .particle { position: absolute; border-radius: 50%; background: rgba(56,198,217,0.3); animation: floatUp linear infinite; }
-    @keyframes floatUp { 0%{transform:translateY(0) scale(1);opacity:0;} 10%{opacity:1;} 90%{opacity:.5;} 100%{transform:translateY(-80px) scale(.5);opacity:0;} }
-
-    /* ── HERO ── */
-    .hero { min-height: 100vh; background: var(--blue-deep); position: relative; display: flex; flex-direction: column; overflow: hidden; }
-
-    /* ── NAV ── */
-    nav { position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
-    .logo { display: flex; align-items: center; gap: 12px; }
-    .logo-mark { width: 40px; height: 40px; background: linear-gradient(135deg,var(--blue-light),var(--aqua)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display',serif; font-size: 18px; color: white; position: relative; overflow: hidden; flex-shrink: 0; }
-    .logo-mark::after { content:''; position: absolute; bottom: -4px; left: -4px; right: -4px; height: 12px; background: rgba(56,198,217,0.4); border-radius: 50%; }
-    .logo-text { font-size: 14px; color: rgba(255,255,255,0.92); font-weight: 500; letter-spacing: .05em; line-height: 1.2; }
-    .logo-sub { font-size: 9px; color: rgba(255,255,255,0.38); letter-spacing: .05em; font-weight: 300; }
-
-    .nav-links { display: flex; gap: 1.75rem; list-style: none; align-items: center; }
-    .nav-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; font-weight: 400; transition: color .2s; }
-    .nav-links a:hover { color: white; }
-    .nav-cta { padding: .5rem 1.25rem; background: var(--aqua) !important; color: var(--blue-deep) !important; border-radius: 6px; font-weight: 500 !important; white-space: nowrap; }
-
-    /* Hamburger */
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-    .hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.8); border-radius: 2px; transition: all .3s; }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--blue-dark); z-index: 100; padding: 1.5rem 2rem; flex-direction: column; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 15px; padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu .nav-cta { text-align: center; margin-top: .5rem; border: none; border-radius: 8px; padding: .75rem 1.5rem; }
-
-    /* ── HERO CONTENT ── */
-    .hero-content { flex: 1; display: flex; align-items: center; padding: 3rem 2rem 8rem; position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; width: 100%; gap: 3rem; }
-    .hero-left { flex: 1; min-width: 0; }
-
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(56,198,217,0.12); border: 1px solid rgba(56,198,217,0.25); padding: .4rem 1rem; border-radius: 100px; font-size: 12px; color: var(--aqua); letter-spacing: .05em; font-weight: 500; margin-bottom: 1.5rem; animation: fadeUp .6s ease both; }
-    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--aqua); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
-
-    h1 { font-family: 'DM Serif Display',serif; font-size: clamp(2.2rem,5vw,4.5rem); color: white; line-height: 1.1; font-weight: 400; margin-bottom: 1.25rem; animation: fadeUp .6s .1s ease both; }
-    h1 em { color: var(--aqua); font-style: italic; }
-
-    .hero-desc { font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 480px; font-weight: 300; margin-bottom: 2rem; animation: fadeUp .6s .2s ease both; }
-
-    .hero-btns { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; animation: fadeUp .6s .3s ease both; }
-
-    .btn-primary { padding: .8rem 1.75rem; background: var(--aqua); color: var(--blue-deep); border: none; border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans',sans-serif; transition: opacity .2s,transform .1s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-    .btn-primary:hover { opacity: .9; transform: translateY(-1px); }
-
-    .btn-ghost { padding: .8rem 1.75rem; background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.18); border-radius: 8px; font-size: 15px; font-weight: 400; cursor: pointer; font-family: 'DM Sans',sans-serif; transition: border-color .2s,color .2s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.38); color: white; }
-
-    .hero-stats { display: flex; gap: 2rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); flex-wrap: wrap; animation: fadeUp .6s .4s ease both; }
-    .stat-num { font-family: 'DM Serif Display',serif; font-size: 2rem; color: white; line-height: 1; }
-    .stat-label { font-size: 12px; color: rgba(255,255,255,0.38); margin-top: 4px; letter-spacing: .04em; }
-
-    .hero-right { width: 300px; flex-shrink: 0; animation: fadeUp .6s .25s ease both; }
-    .feature-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(56,198,217,0.2); border-radius: 16px; padding: 1.5rem; backdrop-filter: blur(12px); }
-    .feature-card-title { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: .1em; margin-bottom: 1.25rem; font-weight: 500; }
-    .fc-item { display: flex; align-items: flex-start; gap: 12px; padding: .85rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .fc-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .fc-item:first-of-type { padding-top: 0; }
-    .fc-icon { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-    .ic-aqua { background: rgba(56,198,217,0.18); }
-    .ic-blue { background: rgba(58,143,232,0.2); }
-    .ic-deep { background: rgba(26,95,189,0.3); }
-    .fc-name { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 500; }
-    .fc-sub { font-size: 12px; color: rgba(255,255,255,0.32); margin-top: 2px; }
-
-    /* ── CERT STRIP ── */
-    .cert-strip { background: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 2rem; overflow-x: auto; }
-    .cert-label { font-size: 11px; color: var(--text-muted); letter-spacing: .08em; white-space: nowrap; flex-shrink: 0; }
-    .cert-items { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
-    .cert-item { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
-    .cert-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--aqua); display: inline-block; margin-right: 8px; vertical-align: middle; }
-
-    /* ── PROGRAMS ── */
-    .programs-section { background: var(--cream); }
-    section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
-    .section-tag { font-size: 11px; color: var(--blue-mid); letter-spacing: .1em; font-weight: 500; margin-bottom: .75rem; text-transform: uppercase; }
-    h2 { font-family: 'DM Serif Display',serif; font-size: clamp(1.8rem,3.5vw,3rem); color: var(--text); line-height: 1.15; font-weight: 400; margin-bottom: 1rem; }
-    .section-desc { font-size: 16px; color: var(--text-muted); line-height: 1.7; max-width: 520px; font-weight: 300; margin-bottom: 2.5rem; }
-    .programs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.25rem; }
-    .prog-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; transition: transform .2s,box-shadow .2s; position: relative; overflow: hidden; }
-    .prog-card::before { content:''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--blue-mid),var(--aqua)); opacity: 0; transition: opacity .2s; }
-    .prog-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(26,95,189,0.1); }
-    .prog-card:hover::before { opacity: 1; }
-    .prog-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 1rem; }
-    .prog-title { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: .5rem; }
-    .prog-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
-    .prog-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
-    .tag { font-size: 11px; padding: 3px 10px; border-radius: 100px; background: var(--blue-pale); color: var(--blue-mid); font-weight: 500; }
-
-    /* ── WHY ── */
-    .why-wrap { background: var(--blue-deep); padding: 4rem 2rem; position: relative; overflow: hidden; }
-    .why-water { position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg,var(--blue-mid),var(--aqua),var(--blue-mid)); background-size: 200% 100%; animation: shimmer 4s linear infinite; }
-    @keyframes shimmer { 0%{background-position:0% 0%;} 100%{background-position:200% 0%;} }
-    .why-inner { max-width: 1100px; margin: 0 auto; }
-    .why-inner h2 { color: white; }
-    .why-inner .section-desc { color: rgba(255,255,255,0.45); }
-    .why-inner .section-tag { color: var(--aqua); }
-    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 2.5rem; }
-    .why-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(56,198,217,0.15); border-radius: 16px; padding: 1.75rem; position: relative; overflow: hidden; }
-    .why-card::after { content:''; position: absolute; bottom: -30px; right: -30px; width: 80px; height: 80px; border-radius: 50%; border: 1px solid rgba(56,198,217,0.1); }
-    .why-num { font-family: 'DM Serif Display',serif; font-size: 2.5rem; color: var(--aqua); line-height: 1; margin-bottom: 1rem; }
-    .why-title { font-size: 16px; color: white; font-weight: 500; margin-bottom: .5rem; }
-    .why-desc { font-size: 14px; color: rgba(255,255,255,0.42); line-height: 1.6; font-weight: 300; }
-
-    /* ── CTA ── */
-    .cta-section { background: var(--cream); padding: 4rem 2rem; text-align: center; }
-    .cta-inner { max-width: 600px; margin: 0 auto; background: white; border: 1px solid var(--border); border-radius: 24px; padding: 3rem 2rem; position: relative; overflow: hidden; }
-    .cta-inner::before { content:''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg,var(--blue-mid),var(--aqua)); }
-    .cta-inner h2 { font-size: clamp(1.6rem,3vw,2.2rem); margin-bottom: 1rem; }
-    .cta-inner p { color: var(--text-muted); font-size: 16px; font-weight: 300; line-height: 1.7; margin-bottom: 2rem; }
-    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    .btn-cta-primary { padding: .85rem 2rem; background: var(--blue-mid); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: 'DM Sans',sans-serif; transition: background .2s,transform .1s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
-    .btn-cta-primary:hover { background: var(--blue-light); transform: translateY(-1px); }
-    .btn-cta-ghost { padding: .85rem 2rem; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 8px; font-size: 15px; cursor: pointer; font-family: 'DM Sans',sans-serif; transition: border-color .2s,color .2s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
-    .btn-cta-ghost:hover { border-color: var(--blue-mid); color: var(--blue-mid); }
-
-    /* WhatsApp floating button */
-    .wa-fab { position: fixed; bottom: 24px; right: 24px; z-index: 999; width: 56px; height: 56px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform .2s,box-shadow .2s; text-decoration: none; }
-    .wa-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
-    .wa-fab svg { width: 28px; height: 28px; fill: white; }
-
-    /* ── FOOTER ── */
-    footer { background: var(--blue-deep); padding: 1.75rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-    .footer-logo { font-family: 'DM Serif Display',serif; font-size: 15px; color: rgba(255,255,255,0.55); }
-    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.28); font-weight: 300; }
-
-    @keyframes fadeUp { from{opacity:0;transform:translateY(20px);} to{opacity:1;transform:translateY(0);} }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .hero-right { display: none; }
-      .hero-content { padding-bottom: 7rem; }
-      .programs-grid { grid-template-columns: 1fr; }
-      .why-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);overflow-x:hidden;}
+    a{text-decoration:none;}
+    img{display:block;max-width:100%;}
+ 
+    /* ─── TOPBAR ─── */
+    .topbar{background:var(--navy);padding:.45rem 2.5rem;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.5);}
+    .topbar a{color:rgba(255,255,255,.5);margin-left:1.5rem;transition:color .2s;}
+    .topbar a:hover{color:#fff;}
+    .topbar-left{display:flex;align-items:center;gap:1.5rem;}
+ 
+    /* ─── NAVBAR ─── */
+    nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;box-shadow:0 1px 12px rgba(11,31,58,.06);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:70px;}
+    .logo{display:flex;align-items:center;gap:14px;}
+    .logo-badge{width:44px;height:44px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;}
+    .logo-badge::after{content:'';position:absolute;bottom:-6px;left:-6px;right:-6px;height:14px;background:rgba(0,180,216,.35);border-radius:50%;}
+    .logo-badge span{font-family:'Playfair Display',serif;font-size:20px;color:#fff;position:relative;z-index:1;}
+    .logo-name{font-size:15px;font-weight:600;color:var(--navy);letter-spacing:.04em;}
+    .logo-tagline{font-size:10px;color:var(--text-muted);letter-spacing:.06em;margin-top:1px;}
+    .nav-links{display:flex;align-items:center;gap:.25rem;list-style:none;}
+    .nav-links a{padding:.55rem .9rem;font-size:13.5px;color:var(--text-mid);font-weight:500;border-radius:6px;transition:background .15s,color .15s;}
+    .nav-links a:hover{background:var(--gray);color:var(--blue);}
+    .nav-cta{background:var(--blue)!important;color:#fff!important;padding:.55rem 1.2rem!important;border-radius:6px;}
+    .nav-cta:hover{background:var(--blue-light)!important;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;border:none;background:none;padding:4px;}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:all .3s;}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .hamburger.open span:nth-child(2){opacity:0;}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);flex-direction:column;padding:1rem 2rem 1.5rem;gap:.25rem;box-shadow:0 8px 24px rgba(0,0,0,.08);}
+    .mobile-menu.open{display:flex;}
+    .mobile-menu a{padding:.65rem .75rem;font-size:14px;color:var(--text-mid);font-weight:500;border-radius:6px;}
+    .mobile-menu a:hover{background:var(--gray);color:var(--blue);}
+    .mobile-menu .nav-cta{background:var(--blue)!important;color:#fff!important;text-align:center;margin-top:.5rem;}
+ 
+    /* ─── HERO ─── */
+    .hero{min-height:92vh;background:var(--navy);display:flex;flex-direction:column;position:relative;overflow:hidden;}
+    .hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1600&q=80&auto=format&fit=crop');background-size:cover;background-position:center;opacity:.12;}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(11,31,58,.97) 50%,rgba(21,87,176,.75) 100%);}
+ 
+    /* Wave rings */
+    .ring{position:absolute;border-radius:50%;border:1px solid rgba(0,180,216,.12);animation:ringPulse 10s ease-in-out infinite;}
+    .ring-1{width:500px;height:500px;bottom:-200px;right:-100px;animation-delay:0s;}
+    .ring-2{width:800px;height:800px;bottom:-380px;right:-280px;animation-delay:2s;}
+    .ring-3{width:1100px;height:1100px;bottom:-560px;right:-460px;animation-delay:4s;}
+    @keyframes ringPulse{0%,100%{transform:scale(1);opacity:.5;}50%{transform:scale(1.03);opacity:1;}}
+ 
+    /* Wave at bottom */
+    .hero-wave{position:absolute;bottom:0;left:0;right:0;height:100px;overflow:hidden;}
+    .hero-wave svg{position:absolute;bottom:0;width:200%;animation:wavePan 12s linear infinite;}
+    .hero-wave svg:nth-child(2){animation:wavePan 18s linear infinite reverse;opacity:.4;}
+    @keyframes wavePan{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+ 
+    .hero-inner{max-width:1200px;margin:0 auto;padding:4rem 2.5rem 7rem;display:flex;align-items:center;gap:4rem;position:relative;z-index:2;width:100%;flex:1;}
+ 
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(0,180,216,.12);border:1px solid rgba(0,180,216,.25);border-radius:4px;padding:.35rem 1rem;font-size:11px;color:var(--aqua-light);letter-spacing:.1em;font-weight:600;margin-bottom:1.75rem;text-transform:uppercase;}
+    .eyebrow-line{width:20px;height:1px;background:var(--aqua);}
+ 
+    h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,4rem);color:#fff;line-height:1.12;font-weight:700;margin-bottom:1.5rem;}
+    h1 em{color:var(--aqua);font-style:italic;}
+ 
+    .hero-desc{font-size:16px;color:rgba(255,255,255,.55);line-height:1.75;max-width:520px;font-weight:300;margin-bottom:2.5rem;}
+ 
+    .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem;}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:.85rem 2rem;background:var(--blue);color:#fff;border:none;border-radius:6px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,transform .1s;}
+    .btn-primary:hover{background:var(--blue-light);transform:translateY(-1px);}
+    .btn-outline{display:inline-flex;align-items:center;gap:8px;padding:.85rem 2rem;background:transparent;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.25);border-radius:6px;font-size:14.5px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .2s,color .2s,background .2s;}
+    .btn-outline:hover{border-color:rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.05);}
+ 
+    .hero-kpi{display:flex;gap:2.5rem;padding-top:2.5rem;border-top:1px solid rgba(255,255,255,.1);}
+    .kpi-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:#fff;line-height:1;}
+    .kpi-label{font-size:11.5px;color:rgba(255,255,255,.4);margin-top:5px;font-weight:400;letter-spacing:.03em;}
+ 
+    .hero-card{width:320px;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(0,180,216,.2);border-radius:12px;overflow:hidden;backdrop-filter:blur(16px);}
+    .hero-card-head{padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;gap:10px;}
+    .hch-dot{width:8px;height:8px;border-radius:50%;background:var(--aqua);animation:pulse 2s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+    .hch-label{font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.1em;font-weight:600;}
+    .fc-item{display:flex;align-items:flex-start;gap:12px;padding:.9rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.05);}
+    .fc-item:last-child{border-bottom:none;}
+    .fc-icon{width:36px;height:36px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:15px;}
+    .ic1{background:rgba(0,180,216,.18);}
+    .ic2{background:rgba(45,125,210,.2);}
+    .ic3{background:rgba(11,31,58,.5);}
+    .fc-name{font-size:13.5px;color:rgba(255,255,255,.85);font-weight:500;}
+    .fc-sub{font-size:11px;color:rgba(255,255,255,.3);margin-top:2px;}
+ 
+    /* ─── DIVIDER BAR ─── */
+    .divider-bar{background:#fff;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;align-items:center;gap:2.5rem;overflow-x:auto;}
+    .db-label{font-size:10.5px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;font-weight:600;}
+    .db-sep{width:1px;height:24px;background:var(--border);flex-shrink:0;}
+    .db-items{display:flex;gap:2.5rem;align-items:center;}
+    .db-item{font-size:13px;color:var(--text-mid);white-space:nowrap;display:flex;align-items:center;gap:7px;font-weight:500;}
+    .db-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;}
+ 
+    /* ─── SECTION COMMON ─── */
+    .section-wrap{padding:5.5rem 2.5rem;}
+    .section-inner{max-width:1200px;margin:0 auto;}
+    .section-kicker{font-size:11px;color:var(--blue);letter-spacing:.12em;font-weight:700;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:10px;}
+    .section-kicker::before{content:'';width:24px;height:2px;background:var(--blue);}
+    h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,2.8rem);color:var(--navy);line-height:1.18;font-weight:700;margin-bottom:.9rem;}
+    .section-desc{font-size:15.5px;color:var(--text-mid);line-height:1.75;max-width:560px;font-weight:300;margin-bottom:3rem;}
+ 
+    /* ─── PROGRAMS ─── */
+    .programs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
+    .prog-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:box-shadow .25s,transform .25s;cursor:default;}
+    .prog-card:hover{box-shadow:0 12px 40px rgba(21,87,176,.1);transform:translateY(-3px);}
+    .prog-img{width:100%;height:200px;object-fit:cover;background:var(--gray);}
+    .prog-img-placeholder{width:100%;height:200px;background:var(--gray);display:flex;align-items:center;justify-content:center;font-size:2.5rem;}
+    .prog-body{padding:1.5rem;}
+    .prog-cat{font-size:10.5px;color:var(--blue);letter-spacing:.1em;font-weight:700;text-transform:uppercase;margin-bottom:.5rem;}
+    .prog-title{font-size:16px;font-weight:600;color:var(--navy);margin-bottom:.5rem;line-height:1.35;}
+    .prog-desc{font-size:13.5px;color:var(--text-mid);line-height:1.65;font-weight:300;}
+    .prog-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem;}
+    .tag{font-size:11px;padding:3px 10px;border-radius:3px;background:var(--gray);color:var(--blue);font-weight:600;letter-spacing:.03em;}
+ 
+    /* ─── DARK SECTION (WHY) ─── */
+    .dark-section{background:var(--navy);padding:5.5rem 2.5rem;position:relative;overflow:hidden;}
+    .dark-section::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--aqua),var(--blue));background-size:200%;animation:shimmer 5s linear infinite;}
+    @keyframes shimmer{0%{background-position:0%;}100%{background-position:200%;}}
+    .dark-inner{max-width:1200px;margin:0 auto;}
+    .dark-inner h2{color:#fff;}
+    .dark-inner .section-desc{color:rgba(255,255,255,.45);}
+    .dark-inner .section-kicker{color:var(--aqua);}
+    .dark-inner .section-kicker::before{background:var(--aqua);}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem;}
+    .why-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:2rem 1.75rem;position:relative;}
+    .why-card::after{content:'';position:absolute;bottom:-24px;right:-24px;width:70px;height:70px;border-radius:50%;border:1px solid rgba(0,180,216,.1);}
+    .why-num{font-family:'Playfair Display',serif;font-size:3rem;color:var(--aqua);line-height:1;margin-bottom:1.25rem;opacity:.6;}
+    .why-title{font-size:15.5px;color:#fff;font-weight:600;margin-bottom:.5rem;}
+    .why-desc{font-size:13.5px;color:rgba(255,255,255,.4);line-height:1.7;font-weight:300;}
+ 
+    /* ─── PARTNERS ─── */
+    .partners-section{background:#fff;padding:5.5rem 2.5rem;}
+    .partners-inner{max-width:1200px;margin:0 auto;}
+    .partners-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem;}
+    .partner-card{border:1px solid var(--border);border-radius:10px;padding:1.75rem;display:flex;flex-direction:column;align-items:center;text-align:center;transition:box-shadow .2s,border-color .2s;}
+    .partner-card:hover{box-shadow:0 8px 30px rgba(21,87,176,.08);border-color:rgba(21,87,176,.2);}
+    .partner-logo-wrap{width:100%;height:90px;border-radius:8px;overflow:hidden;margin-bottom:1.25rem;background:#f8f9fb;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);padding:12px 16px;}
+    .partner-logo-wrap img{max-width:100%;max-height:66px;object-fit:contain;}
+    .partner-logo-wrap svg{max-width:160px;max-height:66px;width:100%;height:auto;}
+    .partner-name{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:.35rem;line-height:1.3;}
+    .partner-type{font-size:11px;color:var(--blue);letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-bottom:.5rem;}
+    .partner-desc{font-size:12.5px;color:var(--text-muted);line-height:1.6;font-weight:300;}
+ 
+    /* ─── CTA ─── */
+    .cta-section{background:var(--cream);padding:5.5rem 2.5rem;}
+    .cta-box{max-width:700px;margin:0 auto;background:var(--navy);border-radius:12px;padding:4rem 3rem;text-align:center;position:relative;overflow:hidden;}
+    .cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--aqua));}
+    .cta-box h2{color:#fff;font-size:clamp(1.7rem,2.5vw,2.3rem);margin-bottom:1rem;}
+    .cta-box p{color:rgba(255,255,255,.5);font-size:15.5px;line-height:1.75;font-weight:300;margin-bottom:2.5rem;}
+    .cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .btn-wa{display:inline-flex;align-items:center;gap:9px;padding:.9rem 2rem;background:#25D366;color:#fff;border:none;border-radius:6px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:background .2s,transform .1s;}
+    .btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);}
+    .btn-wa-outline{display:inline-flex;align-items:center;gap:9px;padding:.9rem 2rem;background:transparent;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.2);border-radius:6px;font-size:14.5px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:border-color .2s,color .2s;}
+    .btn-wa-outline:hover{border-color:rgba(255,255,255,.4);color:#fff;}
+    .cta-address{font-size:12.5px;color:rgba(255,255,255,.3);margin-top:2rem;}
+ 
+    /* ─── FOOTER ─── */
+    footer{background:var(--navy);border-top:1px solid rgba(255,255,255,.07);padding:2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+    .footer-brand{display:flex;align-items:center;gap:10px;}
+    .footer-name{font-size:13.5px;color:rgba(255,255,255,.5);font-weight:500;}
+    .footer-copy{font-size:12px;color:rgba(255,255,255,.25);}
+    .footer-links{display:flex;gap:1.5rem;}
+    .footer-links a{font-size:12px;color:rgba(255,255,255,.3);transition:color .2s;}
+    .footer-links a:hover{color:rgba(255,255,255,.6);}
+ 
+    /* ─── WA FAB ─── */
+    .wa-fab{position:fixed;bottom:28px;right:28px;z-index:999;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .2s,box-shadow .2s;}
+    .wa-fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.5);}
+    .wa-fab svg{width:28px;height:28px;fill:#fff;}
+ 
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:1024px){
+      .programs-grid{grid-template-columns:1fr;}
+      .why-grid{grid-template-columns:1fr 1fr;}
+      .partners-grid{grid-template-columns:repeat(2,1fr);}
+      .hero-card{display:none;}
+      .hero-inner{padding-bottom:6rem;}
     }
-
-    @media (max-width: 600px) {
-      nav { padding: 1rem 1.25rem; }
-      .hero-content { padding: 2rem 1.25rem 7rem; }
-      section { padding: 3rem 1.25rem; }
-      .why-wrap { padding: 3rem 1.25rem; }
-      .cta-section { padding: 3rem 1.25rem; }
-      .cta-inner { padding: 2.5rem 1.5rem; }
-      footer { padding: 1.5rem 1.25rem; }
-      .cert-strip { padding: 1.25rem; }
-      .hero-badge { font-size: 11px; }
-      .hero-btns { flex-direction: column; align-items: flex-start; }
-      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
-      .cta-btns { flex-direction: column; }
-      .btn-cta-primary, .btn-cta-ghost { width: 100%; justify-content: center; }
-      .wa-fab { bottom: 16px; right: 16px; width: 50px; height: 50px; }
-      .hero-stats { gap: 1.5rem; }
+    @media(max-width:768px){
+      .topbar{display:none;}
+      .nav-links{display:none;}
+      .hamburger{display:flex;}
+      .why-grid{grid-template-columns:1fr;}
+      .partners-grid{grid-template-columns:1fr;}
+      .hero-kpi{gap:1.5rem;flex-wrap:wrap;}
+      .hero-actions{flex-direction:column;}
+      .btn-primary,.btn-outline{justify-content:center;width:100%;}
+      .section-wrap,.dark-section,.partners-section,.cta-section{padding:3.5rem 1.5rem;}
+      .hero-inner{padding:2.5rem 1.5rem 6rem;}
+      .cta-box{padding:2.5rem 1.5rem;}
+      .cta-actions{flex-direction:column;}
+      .btn-wa,.btn-wa-outline{justify-content:center;width:100%;}
+      footer{flex-direction:column;align-items:flex-start;gap:.75rem;}
+      .footer-links{flex-wrap:wrap;gap:1rem;}
+      .divider-bar{padding:1.25rem 1.5rem;}
+      .wa-fab{bottom:18px;right:18px;width:50px;height:50px;}
+    }
+    @media(max-width:480px){
+      .nav-inner{padding:0 1.25rem;}
+      h1{font-size:2rem;}
     }
   </style>
 </head>
 <body>
-
-<div class="hero">
-  <div class="ripple ripple-1"></div>
-  <div class="ripple ripple-2"></div>
-  <div class="ripple ripple-3"></div>
-  <div class="ripple ripple-4"></div>
-  <div class="ripple ripple-5"></div>
-  <div class="particles" id="particles"></div>
-
-  <nav>
+ 
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span>📍 Dipo Tower Lt. 16, Jl. Gatot Subroto Kav 51-52, Jakarta Pusat</span>
+  </div>
+  <div>
+    <a href="tel:+62212997999">☎ (021) 2997 9999</a>
+    <a href="https://wa.me/6281234567890" target="_blank">WhatsApp</a>
+    <a href="mailto:info@paten.co.id">info@paten.co.id</a>
+  </div>
+</div>
+ 
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
     <div class="logo">
-      <div class="logo-mark">P</div>
+      <div class="logo-badge"><span>P</span></div>
       <div>
-        <div class="logo-text">PATEN</div>
-        <div class="logo-sub">PT PALYJA TIRTA EDUKASI INDONESIA</div>
+        <div class="logo-name">PATEN</div>
+        <div class="logo-tagline">PT PALYJA TIRTA EDUKASI INDONESIA</div>
       </div>
     </div>
     <ul class="nav-links">
       <li><a href="#">Tentang Kami</a></li>
       <li><a href="#">Program</a></li>
       <li><a href="#">Sertifikasi</a></li>
+      <li><a href="#">Mitra</a></li>
       <li><a href="#">Berita</a></li>
-      <li><a href="https://wa.me/6289516843883" target="_blank" rel="noopener noreferrer" class="nav-cta">Daftar Sekarang</a></li>
+      <li><a href="https://wa.me/6281234567890?text=Halo%20PATEN%2C%20saya%20ingin%20mendaftar%20program%20pelatihan." target="_blank" class="nav-cta">Daftar Sekarang</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#">Tentang Kami</a>
     <a href="#">Program</a>
     <a href="#">Sertifikasi</a>
+    <a href="#">Mitra</a>
     <a href="#">Berita</a>
-    <a href="https://wa.me/6289516843883" target="_blank" class="nav-cta">Daftar Sekarang</a>
+    <a href="https://wa.me/6281234567890?text=Halo%20PATEN%2C%20saya%20ingin%20mendaftar%20program%20pelatihan." target="_blank" class="nav-cta">Daftar Sekarang</a>
   </div>
-
-  <div class="hero-content">
-    <div class="hero-left">
-      <div class="hero-badge">
-        <div class="badge-dot"></div>
-        Lembaga Pelatihan & Sertifikasi Kompetensi
-      </div>
-      <h1>Membangun <em>Keahlian</em><br>Air Minum Indonesia</h1>
-      <p class="hero-desc">PATEN hadir sebagai pusat pendidikan dan sertifikasi kompetensi unggulan untuk sumber daya manusia Sistem Penyediaan Air Minum (SPAM) di tingkat nasional.</p>
-      <div class="hero-btns">
-        <a href="https://wa.me/6289516843883" target="_blank" rel="noopener noreferrer" class="btn-primary">
+</nav>
+ 
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="ring ring-1"></div>
+  <div class="ring ring-2"></div>
+  <div class="ring ring-3"></div>
+ 
+  <div class="hero-inner">
+    <div style="flex:1;min-width:0;">
+      <div class="hero-eyebrow"><span class="eyebrow-line"></span>Lembaga Pelatihan & Sertifikasi Kompetensi Nasional</div>
+      <h1>Membangun <em>Keahlian</em><br>Profesional Air Minum<br>Indonesia</h1>
+      <p class="hero-desc">PATEN adalah lembaga pelatihan dan sertifikasi kompetensi unggulan di bidang Sistem Penyediaan Air Minum (SPAM), didirikan oleh PT PAM Lyonnaise Jaya (PALYJA) pada 25 Februari 2021.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/6281234567890?text=Halo%20PATEN%2C%20saya%20ingin%20mendaftar%20program%20pelatihan." target="_blank" class="btn-primary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.549 4.104 1.514 5.833L.057 23.882l6.204-1.429A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.994-1.366l-.358-.213-3.683.848.872-3.583-.234-.368A9.774 9.774 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
           Daftar Sekarang
         </a>
-        <a href="https://wa.me/6289516843883" target="_blank" rel="noopener noreferrer" class="btn-ghost">Hubungi Kami</a>
+        <a href="https://wa.me/6281234567890?text=Halo%20PATEN%2C%20saya%20ingin%20informasi%20lebih%20lanjut." target="_blank" class="btn-outline">Hubungi Kami</a>
       </div>
-      <div class="hero-stats">
-        <div><div class="stat-num">2021</div><div class="stat-label">Berdiri sejak</div></div>
-        <div><div class="stat-num">12+</div><div class="stat-label">Bidang pelatihan</div></div>
-        <div><div class="stat-num">25+</div><div class="stat-label">Tahun pengalaman PALYJA</div></div>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="feature-card">
-        <div class="feature-card-title">PROGRAM UNGGULAN</div>
-        <div class="fc-item">
-          <div class="fc-icon ic-aqua">🌊</div>
-          <div><div class="fc-name">Kompetensi Inti SPAM</div><div class="fc-sub">Produksi, distribusi & pemeliharaan</div></div>
-        </div>
-        <div class="fc-item">
-          <div class="fc-icon ic-blue">📡</div>
-          <div><div class="fc-name">Teknologi & Otomasi</div><div class="fc-sub">GIS, SCADA, dan IT</div></div>
-        </div>
-        <div class="fc-item">
-          <div class="fc-icon ic-deep">🛡️</div>
-          <div><div class="fc-name">K3 & Keselamatan Kerja</div><div class="fc-sub">Standar nasional dan internasional</div></div>
-        </div>
-        <div class="fc-item">
-          <div class="fc-icon ic-aqua">📋</div>
-          <div><div class="fc-name">Manajemen & Tata Kelola</div><div class="fc-sub">Kepemimpinan organisasi SPAM</div></div>
-        </div>
+      <div class="hero-kpi">
+        <div><div class="kpi-num">2021</div><div class="kpi-label">Berdiri sejak</div></div>
+        <div><div class="kpi-num">12+</div><div class="kpi-label">Bidang pelatihan</div></div>
+        <div><div class="kpi-num">25+</div><div class="kpi-label">Tahun pengalaman PALYJA</div></div>
+        <div><div class="kpi-num">500+</div><div class="kpi-label">Alumni tersertifikasi</div></div>
       </div>
     </div>
+ 
+    <div class="hero-card">
+      <div class="hero-card-head">
+        <div class="hch-dot"></div>
+        <span class="hch-label">PROGRAM UNGGULAN</span>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon ic1">🌊</div>
+        <div><div class="fc-name">Kompetensi Inti SPAM</div><div class="fc-sub">Produksi, distribusi & pemeliharaan</div></div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon ic2">📡</div>
+        <div><div class="fc-name">Teknologi & Otomasi</div><div class="fc-sub">GIS, SCADA, dan IT</div></div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon ic3">🛡️</div>
+        <div><div class="fc-name">K3 & Keselamatan Kerja</div><div class="fc-sub">Standar nasional & internasional</div></div>
+      </div>
+      <div class="fc-item">
+        <div class="fc-icon ic1">📋</div>
+        <div><div class="fc-name">Manajemen & Tata Kelola</div><div class="fc-sub">Kepemimpinan organisasi SPAM</div></div>
+      </div>
+    </div>
   </div>
-
-  <div class="wave-container">
-    <svg class="wave-svg" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,60 C180,100 360,20 540,60 C720,100 900,20 1080,60 C1260,100 1350,40 1440,60 L1440,120 L0,120 Z" fill="rgba(56,198,217,0.12)"/>
-      <path d="M0,60 C180,100 360,20 540,60 C720,100 900,20 1080,60 C1260,100 1350,40 1440,60 L1440,120 L0,120 Z" fill="rgba(56,198,217,0.12)" transform="translate(720,0)"/>
+ 
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,50 C180,90 360,10 540,50 C720,90 900,10 1080,50 C1260,90 1350,30 1440,50 L1440,100 L0,100 Z" fill="rgba(0,180,216,0.1)"/>
+      <path d="M0,50 C180,90 360,10 540,50 C720,90 900,10 1080,50 C1260,90 1350,30 1440,50 L1440,100 L0,100 Z" fill="rgba(0,180,216,0.1)" transform="translate(720,0)"/>
     </svg>
-    <svg class="wave-svg wave-svg-2" viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,40 C200,80 400,10 600,50 C800,90 1000,10 1200,50 C1320,70 1380,30 1440,40 L1440,120 L0,120 Z" fill="rgba(58,143,232,0.1)"/>
-      <path d="M0,40 C200,80 400,10 600,50 C800,90 1000,10 1200,50 C1320,70 1380,30 1440,40 L1440,120 L0,120 Z" fill="rgba(58,143,232,0.1)" transform="translate(720,0)"/>
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:0;width:200%;">
+      <path d="M0,35 C200,75 400,5 600,40 C800,75 1000,5 1200,40 C1320,60 1380,20 1440,35 L1440,100 L0,100 Z" fill="rgba(21,87,176,0.08)"/>
+      <path d="M0,35 C200,75 400,5 600,40 C800,75 1000,5 1200,40 C1320,60 1380,20 1440,35 L1440,100 L0,100 Z" fill="rgba(21,87,176,0.08)" transform="translate(720,0)"/>
     </svg>
+  </div>
+</section>
+ 
+<!-- DIVIDER BAR -->
+<div class="divider-bar">
+  <span class="db-label">Terakreditasi oleh</span>
+  <div class="db-sep"></div>
+  <div class="db-items">
+    <span class="db-item"><span class="db-dot"></span>Kementerian PUPR</span>
+    <span class="db-item"><span class="db-dot"></span>BNSP</span>
+    <span class="db-item"><span class="db-dot"></span>ISO 9001:2015</span>
+    <span class="db-item"><span class="db-dot"></span>Lembaga Sertifikasi Profesi</span>
+    <span class="db-item"><span class="db-dot"></span>PAM Jaya</span>
+    <span class="db-item"><span class="db-dot"></span>Kementerian Ketenagakerjaan RI</span>
   </div>
 </div>
-
-<div class="cert-strip">
-  <span class="cert-label">TERAKREDITASI</span>
-  <div class="cert-items">
-    <span class="cert-item"><span class="cert-dot"></span>Kementerian PUPR</span>
-    <span class="cert-item"><span class="cert-dot"></span>LSP</span>
-    <span class="cert-item"><span class="cert-dot"></span>ISO 9001:2015</span>
-    <span class="cert-item"><span class="cert-dot"></span>BNSP</span>
-    <span class="cert-item"><span class="cert-dot"></span>PAM Jaya</span>
-  </div>
-</div>
-
-<div class="programs-section">
-  <section>
-    <div class="section-tag">Program Pelatihan</div>
-    <h2>Kurikulum Terstruktur<br>untuk Profesional Air Minum</h2>
-    <p class="section-desc">Program kami dirancang selaras dengan perkembangan ilmu pengetahuan dan kebutuhan industri air minum Indonesia.</p>
+ 
+<!-- PROGRAMS -->
+<div class="section-wrap" style="background:var(--cream);">
+  <div class="section-inner">
+    <div class="section-kicker">Program Pelatihan</div>
+    <h2>Kurikulum Terstruktur untuk<br>Profesional Air Minum</h2>
+    <p class="section-desc">Dirancang selaras dengan standar nasional dan kebutuhan industri SPAM, program kami menggabungkan teori dengan praktik lapangan nyata.</p>
+ 
     <div class="programs-grid">
+ 
+      <!-- Card 1 -->
       <div class="prog-card">
-        <div class="prog-icon">🏭</div>
-        <div class="prog-title">Produksi & Pengolahan Air</div>
-        <div class="prog-desc">Pelatihan teknis untuk operasional instalasi pengolahan air, kontrol kualitas, dan manajemen produksi SPAM.</div>
-        <div class="prog-tags"><span class="tag">Teknis</span><span class="tag">Operasional</span><span class="tag">Kualitas Air</span></div>
+        <img class="prog-img" src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?w=800&q=80&auto=format&fit=crop" alt="Pelatihan produksi air" loading="lazy"/>
+        <div class="prog-body">
+          <div class="prog-cat">Kompetensi Inti</div>
+          <div class="prog-title">Produksi & Pengolahan Air Minum</div>
+          <div class="prog-desc">Pelatihan teknis mencakup operasional instalasi pengolahan air (IPA), kontrol kualitas, kimia air, dan manajemen produksi SPAM sesuai standar WHO dan Kemenkes.</div>
+          <div class="prog-tags"><span class="tag">Teknis</span><span class="tag">Operasional</span><span class="tag">Kualitas Air</span><span class="tag">IPA</span></div>
+        </div>
       </div>
+ 
+      <!-- Card 2 -->
       <div class="prog-card">
-        <div class="prog-icon">🗺️</div>
-        <div class="prog-title">Geospasial & SCADA</div>
-        <div class="prog-desc">Penguasaan teknologi GIS untuk pemetaan jaringan dan sistem SCADA untuk otomasi distribusi air.</div>
-        <div class="prog-tags"><span class="tag">Teknologi</span><span class="tag">GIS</span><span class="tag">Otomasi</span></div>
+        <img class="prog-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop" alt="Teknologi GIS dan SCADA" loading="lazy"/>
+        <div class="prog-body">
+          <div class="prog-cat">Teknologi</div>
+          <div class="prog-title">Geospasial (GIS) & Otomasi SCADA</div>
+          <div class="prog-desc">Penguasaan teknologi pemetaan jaringan dengan GIS dan sistem kendali otomatis distribusi air menggunakan platform SCADA berbasis industri terkini.</div>
+          <div class="prog-tags"><span class="tag">GIS</span><span class="tag">SCADA</span><span class="tag">Otomasi</span><span class="tag">Digitalisasi</span></div>
+        </div>
       </div>
+ 
+      <!-- Card 3 -->
       <div class="prog-card">
-        <div class="prog-icon">⚡</div>
-        <div class="prog-title">Manajemen & Audit Energi</div>
-        <div class="prog-desc">Strategi efisiensi energi dalam operasional SPAM, audit konsumsi, dan penerapan energi terbarukan.</div>
-        <div class="prog-tags"><span class="tag">Efisiensi</span><span class="tag">Audit</span><span class="tag">Energi</span></div>
+        <img class="prog-img" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=800&q=80&auto=format&fit=crop" alt="K3 dan Keselamatan Kerja" loading="lazy"/>
+        <div class="prog-body">
+          <div class="prog-cat">Keselamatan Kerja</div>
+          <div class="prog-title">Kesehatan & Keselamatan Kerja (K3L)</div>
+          <div class="prog-desc">Program K3L komprehensif untuk tenaga teknis dan manajerial di lingkungan operasional SPAM, mencakup manajemen risiko, audit K3, dan tanggap darurat.</div>
+          <div class="prog-tags"><span class="tag">K3</span><span class="tag">Lingkungan</span><span class="tag">Risiko</span><span class="tag">HSE</span></div>
+        </div>
       </div>
+ 
+      <!-- Card 4 -->
       <div class="prog-card">
-        <div class="prog-icon">🤝</div>
-        <div class="prog-title">Pelayanan Pelanggan</div>
-        <div class="prog-desc">Standar layanan prima, manajemen hubungan pelanggan, dan penanganan pengaduan untuk PDAM/SPAM.</div>
-        <div class="prog-tags"><span class="tag">Layanan</span><span class="tag">Komunikasi</span><span class="tag">CRM</span></div>
+        <img class="prog-img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80&auto=format&fit=crop" alt="Manajemen dan tata kelola" loading="lazy"/>
+        <div class="prog-body">
+          <div class="prog-cat">Manajemen</div>
+          <div class="prog-title">Tata Kelola & Manajemen Organisasi SPAM</div>
+          <div class="prog-desc">Pelatihan kepemimpinan, audit energi, manajemen keuangan PDAM, hubungan pelanggan, dan tata kelola perusahaan air minum yang profesional dan akuntabel.</div>
+          <div class="prog-tags"><span class="tag">Leadership</span><span class="tag">Audit Energi</span><span class="tag">Keuangan</span><span class="tag">CRM</span></div>
+        </div>
       </div>
+ 
     </div>
-  </section>
+  </div>
 </div>
-
-<div class="why-wrap">
-  <div class="why-water"></div>
-  <div class="why-inner">
-    <div class="section-tag">Mengapa PATEN</div>
-    <h2>Lebih dari Sekadar<br>Pelatihan Biasa</h2>
-    <p class="section-desc">Didirikan oleh PALYJA dengan pengalaman lebih dari 25 tahun, PATEN membawa keahlian nyata dari lapangan ke ruang kelas.</p>
+ 
+<!-- WHY PATEN -->
+<div class="dark-section">
+  <div class="dark-inner">
+    <div class="section-kicker">Mengapa Memilih PATEN</div>
+    <h2>Standar Industri,<br>Kompetensi Nyata</h2>
+    <p class="section-desc">Didukung oleh PALYJA dengan lebih dari 25 tahun pengalaman operasional, PATEN menghadirkan keahlian langsung dari lapangan.</p>
     <div class="why-grid">
       <div class="why-card">
         <div class="why-num">01</div>
-        <div class="why-title">Instruktur Berpengalaman</div>
-        <div class="why-desc">Tenaga pengajar berasal dari praktisi langsung industri air minum dengan rekam jejak operasional nyata.</div>
+        <div class="why-title">Instruktur Praktisi Berpengalaman</div>
+        <div class="why-desc">Seluruh pengajar adalah praktisi aktif dengan pengalaman nyata di lapangan operasional air minum, bukan hanya akademisi.</div>
       </div>
       <div class="why-card">
         <div class="why-num">02</div>
-        <div class="why-title">Kurikulum Relevan</div>
-        <div class="why-desc">Program selalu diperbarui mengikuti regulasi terbaru Kementerian PUPR dan perkembangan teknologi SPAM.</div>
+        <div class="why-title">Kurikulum Selaras Regulasi</div>
+        <div class="why-desc">Program selalu diperbarui mengikuti Peraturan Menteri PUPR, Permenperin, dan standar teknologi SPAM terkini.</div>
       </div>
       <div class="why-card">
         <div class="why-num">03</div>
         <div class="why-title">Sertifikasi Diakui Nasional</div>
-        <div class="why-desc">Sertifikat kompetensi diakui lembaga pemerintah, regulator, dan industri air minum seluruh Indonesia.</div>
+        <div class="why-desc">Sertifikat kompetensi PATEN diakui oleh BNSP, Kementerian PUPR, dan ratusan PDAM seluruh Indonesia.</div>
       </div>
     </div>
   </div>
 </div>
-
+ 
+<!-- PARTNERS -->
+<div class="partners-section">
+  <div class="partners-inner">
+    <div class="section-kicker">Mitra & Kemitraan</div>
+    <h2>Didukung oleh Institusi<br>Terpercaya di Indonesia</h2>
+    <p class="section-desc">PATEN berkolaborasi dengan lembaga pemerintah, regulator, dan asosiasi industri air minum terkemuka untuk memastikan standar kompetensi tertinggi.</p>
+ 
+    <div class="partners-grid">
+ 
+      <!-- PALYJA -->
+      <div class="partner-card">
+        <div class="partner-logo-wrap" style="background:#fff;">
+          <svg viewBox="0 0 280 70" xmlns="http://www.w3.org/2000/svg" aria-label="PALYJA">
+            <!-- Water drop icon -->
+            <path d="M18 8 C18 8 6 22 6 30 C6 37.7 11.4 44 18 44 C24.6 44 30 37.7 30 30 C30 22 18 8 18 8Z" fill="#0055A5"/>
+            <path d="M18 14 C18 14 10 24 10 30 C10 35.5 13.6 40 18 40 C22.4 40 26 35.5 26 30 C26 24 18 14 18 14Z" fill="#00ADEF"/>
+            <path d="M14 26 C14 26 10 30 10 33 C10 36 11.8 39 14 39" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- PALYJA text -->
+            <text x="40" y="26" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#0055A5" letter-spacing="1">PALYJA</text>
+            <text x="40" y="40" font-family="Arial,sans-serif" font-size="7.5" fill="#555" letter-spacing=".5">PT PAM LYONNAISE JAYA</text>
+            <text x="40" y="50" font-family="Arial,sans-serif" font-size="7" fill="#888">Induk Perusahaan PATEN</text>
+          </svg>
+        </div>
+        <div class="partner-type">Induk Perusahaan</div>
+        <div class="partner-name">PT PAM Lyonnaise Jaya (PALYJA)</div>
+        <div class="partner-desc">Induk pendiri PATEN dengan pengalaman lebih dari 25 tahun sebagai operator penyediaan air bersih wilayah Barat DKI Jakarta.</div>
+      </div>
+ 
+      <!-- PAM JAYA -->
+      <div class="partner-card">
+        <div class="partner-logo-wrap" style="background:#fff;">
+          <svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg" aria-label="PAM Jaya">
+            <!-- Garuda-style emblem simplified -->
+            <circle cx="28" cy="32" r="24" fill="#003F87"/>
+            <circle cx="28" cy="32" r="20" fill="#0055AA" stroke="#FCD116" stroke-width="2"/>
+            <!-- Water wave inside circle -->
+            <path d="M14 32 Q19 26 24 32 Q29 38 34 32 Q39 26 44 32" stroke="#FCD116" stroke-width="2" fill="none"/>
+            <path d="M14 36 Q19 30 24 36 Q29 42 34 36 Q39 30 44 36" stroke="rgba(252,209,22,.5)" stroke-width="1.5" fill="none"/>
+            <!-- Text -->
+            <text x="60" y="25" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#003F87">PAM JAYA</text>
+            <text x="60" y="39" font-family="Arial,sans-serif" font-size="7.5" fill="#555">PERUSAHAAN UMUM DAERAH</text>
+            <text x="60" y="50" font-family="Arial,sans-serif" font-size="7.5" fill="#555">AIR MINUM JAYA</text>
+          </svg>
+        </div>
+        <div class="partner-type">BUMD Air Minum</div>
+        <div class="partner-name">PAM Jaya</div>
+        <div class="partner-desc">Perusahaan Air Minum DKI Jakarta, mitra utama PALYJA selama 25 tahun dan pemangku kepentingan kunci pengembangan SDM air minum ibukota.</div>
+      </div>
+ 
+      <!-- KEMENTERIAN PUPR -->
+      <div class="partner-card">
+        <div class="partner-logo-wrap" style="background:#fff;">
+          <svg viewBox="0 0 270 70" xmlns="http://www.w3.org/2000/svg" aria-label="Kementerian PUPR">
+            <!-- PUPR emblem - stylized building/infrastructure -->
+            <rect x="4" y="16" width="50" height="38" rx="2" fill="#C8AA00"/>
+            <!-- Building columns -->
+            <rect x="8" y="24" width="6" height="28" rx="1" fill="#8B7300"/>
+            <rect x="18" y="24" width="6" height="28" rx="1" fill="#8B7300"/>
+            <rect x="28" y="24" width="6" height="28" rx="1" fill="#8B7300"/>
+            <rect x="38" y="24" width="6" height="28" rx="1" fill="#8B7300"/>
+            <rect x="6" y="18" width="46" height="7" rx="1" fill="#8B7300"/>
+            <rect x="2" y="50" width="54" height="4" rx="1" fill="#8B7300"/>
+            <!-- Stars above -->
+            <text x="29" y="15" font-family="Arial" font-size="8" fill="#C8AA00" text-anchor="middle">★ ★ ★</text>
+            <!-- Text -->
+            <text x="65" y="23" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#1A3A6B">KEMENTERIAN</text>
+            <text x="65" y="35" font-family="Arial,sans-serif" font-size="10" font-weight="700" fill="#1A3A6B">PEKERJAAN UMUM</text>
+            <text x="65" y="46" font-family="Arial,sans-serif" font-size="8.5" fill="#1A3A6B">DAN PERUMAHAN RAKYAT</text>
+            <text x="65" y="57" font-family="Arial,sans-serif" font-size="8" fill="#888">REPUBLIK INDONESIA</text>
+          </svg>
+        </div>
+        <div class="partner-type">Kementerian</div>
+        <div class="partner-name">Kementerian PUPR</div>
+        <div class="partner-desc">Regulator utama kebijakan air minum nasional, memberikan pengakuan dan akreditasi program pelatihan SPAM yang diselenggarakan PATEN.</div>
+      </div>
+ 
+      <!-- BNSP -->
+      <div class="partner-card">
+        <div class="partner-logo-wrap" style="background:#fff;">
+          <svg viewBox="0 0 260 70" xmlns="http://www.w3.org/2000/svg" aria-label="BNSP">
+            <!-- BNSP shield emblem -->
+            <path d="M28 8 L50 18 L50 40 C50 52 28 62 28 62 C28 62 6 52 6 40 L6 18 Z" fill="#003399"/>
+            <path d="M28 12 L46 21 L46 40 C46 50 28 58 28 58 C28 58 10 50 10 40 L10 21 Z" fill="#0044CC"/>
+            <!-- Checkmark / certification symbol -->
+            <path d="M17 36 L24 43 L40 27" stroke="#FCD116" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Text -->
+            <text x="60" y="26" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#003399" letter-spacing="1">BNSP</text>
+            <text x="60" y="39" font-family="Arial,sans-serif" font-size="7.5" fill="#555">BADAN NASIONAL</text>
+            <text x="60" y="50" font-family="Arial,sans-serif" font-size="7.5" fill="#555">SERTIFIKASI PROFESI</text>
+          </svg>
+        </div>
+        <div class="partner-type">Badan Nasional</div>
+        <div class="partner-name">BNSP</div>
+        <div class="partner-desc">Badan Nasional Sertifikasi Profesi yang memberikan lisensi dan pengakuan resmi atas seluruh program sertifikasi kompetensi PATEN di tingkat nasional.</div>
+      </div>
+ 
+      <!-- KEMNAKER -->
+      <div class="partner-card">
+        <div class="partner-logo-wrap" style="background:#fff;">
+          <svg viewBox="0 0 270 70" xmlns="http://www.w3.org/2000/svg" aria-label="Kemnaker">
+            <!-- Kemnaker gear/cog emblem -->
+            <g transform="translate(28,32)">
+              <circle r="14" fill="#CC0000"/>
+              <circle r="10" fill="#fff"/>
+              <circle r="6" fill="#CC0000"/>
+              <!-- Gear teeth (simplified) -->
+              <rect x="-2" y="-18" width="4" height="6" rx="1" fill="#CC0000"/>
+              <rect x="-2" y="12" width="4" height="6" rx="1" fill="#CC0000"/>
+              <rect x="12" y="-2" width="6" height="4" rx="1" fill="#CC0000"/>
+              <rect x="-18" y="-2" width="6" height="4" rx="1" fill="#CC0000"/>
+              <rect x="8" y="-15" width="4" height="6" rx="1" fill="#CC0000" transform="rotate(45)"/>
+              <rect x="-12" y="9" width="4" height="6" rx="1" fill="#CC0000" transform="rotate(45)"/>
+            </g>
+            <text x="58" y="22" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#CC0000">KEMENTERIAN</text>
+            <text x="58" y="33" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#CC0000">KETENAGAKERJAAN</text>
+            <text x="58" y="44" font-family="Arial,sans-serif" font-size="8.5" fill="#555">REPUBLIK INDONESIA</text>
+          </svg>
+        </div>
+        <div class="partner-type">Kementerian</div>
+        <div class="partner-name">Kementerian Ketenagakerjaan RI</div>
+        <div class="partner-desc">Pengakuan program pelatihan berbasis kompetensi (PBK) dan sertifikasi tenaga kerja bidang air minum sesuai standar SKKNI nasional.</div>
+      </div>
+ 
+      <!-- PERPAMSI -->
+      <div class="partner-card">
+        <div class="partner-logo-wrap" style="background:#fff;">
+          <svg viewBox="0 0 270 70" xmlns="http://www.w3.org/2000/svg" aria-label="PERPAMSI">
+            <!-- PERPAMSI water drop logo -->
+            <path d="M28 6 C28 6 10 24 10 36 C10 46.5 18.1 55 28 55 C37.9 55 46 46.5 46 36 C46 24 28 6 28 6Z" fill="#006DB6"/>
+            <path d="M28 14 C28 14 16 28 16 36 C16 43 21.4 49 28 49 C34.6 49 40 43 40 36 C40 28 28 14 28 14Z" fill="#00AEEF"/>
+            <!-- Waves inside drop -->
+            <path d="M18 34 Q22 29 26 34 Q30 39 34 34 Q38 29 40 32" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- Text -->
+            <text x="58" y="26" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#006DB6" letter-spacing=".5">PERPAMSI</text>
+            <text x="58" y="39" font-family="Arial,sans-serif" font-size="7" fill="#555">PERSATUAN PERUSAHAAN</text>
+            <text x="58" y="49" font-family="Arial,sans-serif" font-size="7" fill="#555">AIR MINUM SELURUH INDONESIA</text>
+          </svg>
+        </div>
+        <div class="partner-type">Asosiasi Nasional</div>
+        <div class="partner-name">PERPAMSI</div>
+        <div class="partner-desc">Persatuan Perusahaan Air Minum Seluruh Indonesia — jaringan PDAM dari seluruh provinsi yang menjadi target utama peserta pelatihan PATEN.</div>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+ 
+<!-- CTA -->
 <div class="cta-section">
-  <div class="cta-inner">
-    <div class="section-tag" style="text-align:center;">Bergabung Bersama Kami</div>
-    <h2>Siap Tingkatkan Kompetensi Anda?</h2>
-    <p>Daftarkan diri atau tim Anda dalam program pelatihan dan sertifikasi PATEN. Bersama kami, bangun Indonesia yang lebih baik melalui air bersih yang berkualitas.</p>
-    <div class="cta-btns">
-      <a href="https://wa.me/6289516843883" target="_blank" rel="noopener noreferrer" class="btn-cta-primary">
+  <div class="cta-box">
+    <div class="section-kicker" style="justify-content:center;color:var(--aqua-light);margin-bottom:.75rem;">
+      <span style="width:24px;height:2px;background:var(--aqua);display:inline-block;"></span>
+      Bergabung Bersama Kami
+    </div>
+    <h2>Siap Tingkatkan<br>Kompetensi Tim Anda?</h2>
+    <p>Daftarkan diri atau tim Anda dalam program pelatihan dan sertifikasi PATEN. Hubungi kami langsung melalui WhatsApp untuk konsultasi dan informasi program.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/6281234567890?text=Halo%20PATEN%2C%20saya%20ingin%20mendaftar%20program%20pelatihan." target="_blank" class="btn-wa">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.549 4.104 1.514 5.833L.057 23.882l6.204-1.429A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.994-1.366l-.358-.213-3.683.848.872-3.583-.234-.368A9.774 9.774 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
         Daftar Sekarang
       </a>
-      <a href="https://wa.me/6289516843883" target="_blank" rel="noopener noreferrer" class="btn-cta-ghost">
+      <a href="https://wa.me/6281234567890?text=Halo%20PATEN%2C%20saya%20ingin%20informasi%20lebih%20lanjut." target="_blank" class="btn-wa-outline">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.549 4.104 1.514 5.833L.057 23.882l6.204-1.429A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.994-1.366l-.358-.213-3.683.848.872-3.583-.234-.368A9.774 9.774 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
         Hubungi Kami
       </a>
     </div>
-    <p style="font-size:13px;color:var(--text-muted);margin-top:1.5rem;margin-bottom:0;">Dipo Tower Lt. 16, Jl. Gatot Subroto Kav 51-52, Jakarta Pusat</p>
+    <div class="cta-address">Dipo Tower Lt. 16, Jl. Jend. Gatot Subroto Kav 51-52, Tanah Abang, Jakarta Pusat 10260</div>
   </div>
 </div>
-
+ 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">PATEN — PT PALYJA Tirta Edukasi Indonesia</div>
-  <div class="footer-copy">© 2026 PATEN. Semua hak dilindungi.</div>
+  <div class="footer-brand">
+    <div class="logo-badge" style="width:32px;height:32px;font-size:15px;"><span>P</span></div>
+    <div class="footer-name">PATEN — PT PALYJA Tirta Edukasi Indonesia</div>
+  </div>
+  <div class="footer-links">
+    <a href="#">Tentang Kami</a>
+    <a href="#">Program</a>
+    <a href="#">Sertifikasi</a>
+    <a href="#">Kebijakan Privasi</a>
+  </div>
+  <div class="footer-copy">© 2024 PATEN. Semua hak dilindungi undang-undang.</div>
 </footer>
-
-<!-- WhatsApp Floating Button -->
-<a href="https://wa.me/6289516843883" target="_blank" rel="noopener noreferrer" class="wa-fab" aria-label="Chat WhatsApp">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.549 4.104 1.514 5.833L.057 23.882l6.204-1.429A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.994-1.366l-.358-.213-3.683.848.872-3.583-.234-.368A9.774 9.774 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/>
-  </svg>
+ 
+<!-- WA FAB -->
+<a href="https://wa.me/6281234567890?text=Halo%20PATEN%2C%20saya%20ingin%20informasi%20lebih%20lanjut." target="_blank" class="wa-fab" aria-label="Chat WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.549 4.104 1.514 5.833L.057 23.882l6.204-1.429A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.994-1.366l-.358-.213-3.683.848.872-3.583-.234-.368A9.774 9.774 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
 </a>
-
+ 
 <script>
-  // Particles
-  const container = document.getElementById('particles');
-  for (let i = 0; i < 18; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random() * 4 + 2;
-    p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;bottom:${Math.random()*40}%;animation-duration:${Math.random()*6+5}s;animation-delay:${Math.random()*8}s;`;
-    container.appendChild(p);
-  }
-
-  // Hamburger menu
   const btn = document.getElementById('hamburger');
   const menu = document.getElementById('mobileMenu');
-  btn.addEventListener('click', () => {
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
-  });
+  btn.addEventListener('click',()=>{btn.classList.toggle('open');menu.classList.toggle('open');});
 </script>
 </body>
 </html>
